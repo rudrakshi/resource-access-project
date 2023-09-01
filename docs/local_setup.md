@@ -4,6 +4,7 @@
 ## Clone the project
 ```
 git clone https://github.com/rudrakshi/resource-access-project.git
+cd resource-access-project
 ```
 
 ### Install dependencies
@@ -17,16 +18,19 @@ uvicorn api.resource_api:api --host 0.0.0.0 --port 8282
 ```
 
 ### Run Gateway server
+Run following command in new terminal:
 ```
 uvicorn gateway.gateway_api:gate --host 0.0.0.0 --port 8484
 ```
 
 ### Run Consumer server
+Run following command in new terminal:
 ```
 flask --app consumer.consumer_app run --host 0.0.0.0 --port 5000
 ```
 
 ### Run test
+Run following command in new terminal:
 ```
 pytest
 ```

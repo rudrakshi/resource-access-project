@@ -5,6 +5,7 @@
 ## Clone the project
 ```
 git clone https://github.com/rudrakshi/resource-access-project.git
+cd resource-access-project
 ```
 
 ### Run all 3 servers
