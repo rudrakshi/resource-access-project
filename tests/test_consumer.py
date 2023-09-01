@@ -54,7 +54,6 @@ class TestConsumer(TestCase):
     def test_valid_authorize(self):
         self.client.post('/authorize',data={"user_name":"janedoe","password":"secret"})
         self.assert_template_used('list.html')
-        print(self.get_context_variable("resources"))
         assert len(self.get_context_variable("resources")) != 0
         self.assert_context("username", "janedoe")
 

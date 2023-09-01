@@ -104,8 +104,6 @@ def update_resource(resource_id: str, resource: Resource):
     HTTPException: 400
       'resource_id' does not match id in the 'resource' object to be updated
     """
-    print(resource.id)
-    print(resource_id)
     if str(resource.id) != resource_id:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Path Resource id does not match with content resource id.")
     if resources.get(resource_id) is not None:

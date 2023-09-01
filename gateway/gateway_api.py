@@ -111,7 +111,6 @@ async def post_request(path: str, request: Request, header_token: str = Security
     headers.pop('accept-encoding')
     headers.pop('content-length')
     request_data = await request.json()
-    print(request_data)
     res = requests.post(f'{host_url}{path}', params=request.query_params, headers=headers, json=request_data)
 
     return StreamingResponse(

@@ -4,14 +4,12 @@ from api.resource_api import api
 client = TestClient(api)
 
 def test_read_all_resources():
-    print(client)
     response = client.get('/resources')
     assert response.status_code == 200
     assert len(response.json()) != 0
 
 def test_read_resource():
     response = client.get('/resources/1001')
-    print(response)
     assert response.status_code == 200
     assert len(response.json()) != 0
 
