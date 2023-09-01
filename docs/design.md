@@ -33,15 +33,9 @@ It is developed using Flask.
 ## API documentation (provided by Swagger UI)
 >info: Please note these documentation will be available only once the server is running.
 
-### Resource API
-```
-http://127.0.0.1:8282/docs
-```
+[Resource API](http://127.0.0.1:8282/docs)
 
-### Gateway API
-```
-http://127.0.0.1:8484/docs
-```
+[Gateway API](http://127.0.0.1:8484/docs)
 
 ## Improvements
 - Enable HTTPS
