@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Resource App</title>
+    <link rel="stylesheet" href={{url_for('static',filename='main.css')}}>
+  </head>
+
+  <body>
+    <form method="POST">
+    <h3><button type="submit" formaction="/logout">logout</button></h3>
+    <section class="resources">
+      <h1>Resource App</h1>      
+        <input type="hidden" name="user_name" value="{{username}}">
+        <h3><label>Resources</label><br></h3>
+            {% block content %}
+                {% for resrc in resources %}
+                  <input type="radio" value="{{resrc}}" name="resource_id" checked/>
+                  <label>{{resources[resrc].name}}</label><br>
+                  {% endfor %}
+            {% endblock %}
+            <br>
+        <input type="submit" formaction="/details" value="Get details" id="details_btn" class="btn" />
+        <input type="submit" formaction="/new_resource" value="Add new Resource" id="add_btn" class="btn" />
+      
+    </section>
+    <h3>{{ result }}</h3>
+    </form>
+  </body>
+</html>

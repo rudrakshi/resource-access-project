@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Resource App</title>
+    <link rel="stylesheet" href={{url_for('static',filename='main.css')}}>
+  </head>
+
+  <body>
+    <section class="resources">
+      <h1>Resource App</h1>
+
+      <form action="/authorize" method="POST">
+        <label for="user_name">User name</label>
+        <input type="string" placeholder="User name" name="user_name" />
+
+        <label for="password">Password</label>
+        <input type="password" name="password"/>
+
+        <input type="submit" value="Login" id="login_btn" class="btn" />
+
+        <h3>{{ result }}</h3>
+      </form>
+    </section>
+
+  </body>
+</html>

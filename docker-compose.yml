@@ -1,0 +1,45 @@
+version: "3.10"
+
+services:
+  api:
+    build: .
+    container_name: api
+    command: ["uvicorn", "api.resource_api:api","--host","0.0.0.0","--port","8282"]
+    ports:
+      - 8282:8282
+    healthcheck:
+      test: curl --fail http://localhost:8282 || exit 1
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 3
+
+  gateway:
+    build: .
+    container_name: gateway
+    command: ["uvicorn", "gateway.gateway_api:gate","--host","0.0.0.0","--port","8484"]
+    ports:
+      - 8484:8484
+    environment:
+      - API_URL=http://api:8282/
+    healthcheck:
+      test: curl --fail http://localhost:8484 || exit 1
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 3
+
+  consumer:
+    build: .
+    container_name: consumer
+    command: ["flask","--app", "consumer.consumer_app","run","--host","0.0.0.0","--port","5000"]
+    ports:
+      - 5000:5000
+    environment:
+      - GATEWAY_URL=http://gateway:8484
+    healthcheck:
+      test: curl --fail http://localhost:5000 || exit 1
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 3

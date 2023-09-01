@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Resource App</title>
+    <link rel="stylesheet" href={{url_for('static',filename='main.css')}}>
+  </head>
+
+  <body>
+    <form method="POST">
+    <button type="submit" formaction="/list">Home</button>
+    <button type="submit" formaction="/logout">logout</button>
+
+    <section class="resources">
+      <h1>Resource App</h1>
+
+        {% block content %}
+          
+        <input type="hidden" name="user_name" value="{{username}}">
+        {% if details %}
+            <div>
+                <input type="hidden" value='{{details["id"]}}' name="resource_id"/>
+                <h3>{{details["name"]}}</h3>
+
+                <label for="resource_id">Id: </label>
+                <input type="number" placeholder="{{details['id']}}" name="resource_id" disabled /><br>
+
+                <label for="resource_name">Name: </label>
+                <input type="string" placeholder="{{details['name']}}" name="resource_name" required
+                    {% if display_type == "view" %} {{ "disabled" }} {% endif %}
+                /><br>
+
+                <label for="resource_type">Type: </label>
+                <input type="radio" value="Animal" name="resource_type" 
+                    {% if display_type == "view" %} {{ "disabled" }} {% endif %} 
+                    {% if details["type"] == "Animal" %} {{ "checked" }} {% endif %}
+                />
+                <label for="resource_name">Animal</label>
+                <input type="radio" value="Thing" name="resource_type" 
+                    {% if display_type == "view" %} {{ "disabled" }} {% endif %} 
+                    {% if details["type"] == "Thing" %} {{ "checked" }} {% endif %}
+                />
+                <label for="resource_name">Thing</label>
+                <input type="radio" value="Plant" name="resource_type"
+                    {% if display_type == "view" %} {{ "disabled" }} {% endif %} 
+                    {% if details["type"] == "Plant" %} {{ "checked" }} {% endif %}
+                />
+                <label for="resource_name">Plant</label>
+                <input type="radio" value="Metal" name="resource_type"
+                    {% if display_type == "view" %} {{ "disabled" }} {% endif %} 
+                    {% if details["type"] == "Metal" %} {{ "checked" }} {% endif %}
+                />
+                <label for="resource_name">Metal</label>
+                <input type="radio" value="Other" name="resource_type"
+                    {% if display_type == "view" %} {{ "disabled" }} {% endif %} 
+                    {% if details["type"] == "Other" %} {{ "checked" }} {% endif %}
+                />
+                <label for="resource_name">Other</label><br>
+                <label for="is_endangered">Endangered? </label>
+                <input type="radio" value="True" name="is_endangered" 
+                    {% if display_type == "view" %} {{ "disabled" }} {% endif %}
+                    {% if details["is_endangered"] %} {{ "checked" }} {% endif %}
+                />
+                <label for="resource_name">True</label>
+                <input type="radio" value="False" name="is_endangered" 
+                    {% if display_type == "view" %} {{ "disabled" }} {% endif %}
+                    {% if not details["is_endangered"] %} {{ "checked" }} {% endif %}
+                />
+                <label for="resource_name">False</label><br>
+
+            </div>
+            {% if display_type == "view" %}
+                <button type="submit" formaction="/update_resource">Update Resource</button>
+            {% endif %}
+            <button type="submit" formaction="/delete_details">Delete Resource</button>
+            {% if display_type == "update" %}
+                <button type="submit" formaction="/update_details">Update Resource</button>
+            {% endif %}
+        {% elif display_type == "new" %}
+            {% include 'new_resource.html' %}
+            <button type="submit" formaction="/add_details">Add Resource</button>
+        {% endif %}
+        {% endblock %}
+        <h3>{{ result }}</h3>
+      
+    </section>
+    </form>
+  </body>
+</html>
